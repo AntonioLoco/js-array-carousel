@@ -36,10 +36,19 @@ itemsList[positionSlider].classList.add("active");
 nextBtn.addEventListener("click", function(){
 
     // Controlliamo se l'indice non supera la lunghezza della lista immagini
-    if( positionSlider < itemsList.length - 1){
+    if( positionSlider <= itemsList.length - 1){
 
-        // Rimuovere la classe active all'elemento corrente
-        itemsList[positionSlider].classList.remove("active");
+        // Controlliamo se siamo all' ultimo elemento
+        if(positionSlider === itemsList.length - 1){
+            // Impostiamo la posizione attuale al primo elemento
+            positionSlider = -1;
+
+            // Rimuovere la classe active dall'ultimo elemento della lista
+            itemsList[itemsList.length - 1].classList.remove("active");
+        } else {
+            // Rimuovere la classe active all'elemento corrente
+            itemsList[positionSlider].classList.remove("active");
+        }
     
         //Incrementare la variabile della posizione
         positionSlider++;
@@ -55,10 +64,21 @@ nextBtn.addEventListener("click", function(){
 prevBtn.addEventListener("click", function(){
 
     // Controlliamo se l'indice è maggiore di 0
-    if( positionSlider > 0){
-        // Rimuovere la classe active all'elemento corrente
-        itemsList[positionSlider].classList.remove("active");
-    
+    if( positionSlider >= 0){
+
+        // Controlliamo se siamo al primo elemento
+        if(positionSlider === 0){
+            // Impostiamo la posizione attuale all ultimo elemento
+            positionSlider = itemsList.length;
+
+            // Rimuovere la classe active dall'ultimo elemento della lista
+            itemsList[0].classList.remove("active");
+
+        } else {
+            // Rimuovere la classe active all'elemento corrente
+            itemsList[positionSlider].classList.remove("active");
+        }
+
         //Decrementare la variabile della posizione
         positionSlider--;
     
