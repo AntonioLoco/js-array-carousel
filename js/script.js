@@ -104,3 +104,23 @@ prevBtn.addEventListener("click", function(){
 
 });
 
+// BONUS AGGIUNTIVO
+console.log(itemsControlList);
+// const element = itemsControlList[0].innerHTML;
+// console.log(element);
+
+for(let i = 0; i < itemsControlList.length; i++){
+    itemsControlList[i].addEventListener("click", function(){
+        // rimuoviamo la classe active dall' elemento corrente
+        itemsList[positionSlider].classList.remove("active");
+        itemsControlList[positionSlider].classList.remove("active");
+
+        // Impostiamo la posizione attuale dell'elemento
+        positionSlider = i;
+
+        // Aggiungere la classe active al nuovo elemento
+        itemsList[positionSlider].classList.add("active");
+        itemsControlList[positionSlider].classList.add("active");
+        
+    })
+}
