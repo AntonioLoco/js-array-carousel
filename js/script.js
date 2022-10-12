@@ -6,6 +6,7 @@ const sliderImg = [
     "img/05.jpg"
 ]
 
+const carouselImgControl = document.querySelector(".carousel-img-control");
 const carouselImg = document.querySelector(".carousel-img");
 const prevBtn = document.querySelector(".btn.prev");
 const nextBtn = document.querySelector(".btn.next");
@@ -20,16 +21,25 @@ for(let i = 0; i < sliderImg.length; i++){
         </div>
     `;
 
+    const elementControl = 
+    `
+        <div class="item-control">
+            <img src="${sliderImg[i]}" alt="">
+        </div>
+    `;
+
     // Aggiungo la stringa all HTML
     carouselImg.innerHTML += element;
+    carouselImgControl.innerHTML += elementControl;
 }
 
 // Settiamo lo stato di partenza
 const itemsList = document.getElementsByClassName("item");
-console.log(itemsList);
+const itemsControlList = document.getElementsByClassName("item-control");
 
 let positionSlider = 0;
 itemsList[positionSlider].classList.add("active");
+itemsControlList[positionSlider].classList.add("active");
 
 
 // Gestiamo l'evento click sul bottone next
@@ -45,9 +55,11 @@ nextBtn.addEventListener("click", function(){
 
             // Rimuovere la classe active dall'ultimo elemento della lista
             itemsList[itemsList.length - 1].classList.remove("active");
+            itemsControlList[itemsList.length - 1].classList.remove("active");
         } else {
             // Rimuovere la classe active all'elemento corrente
             itemsList[positionSlider].classList.remove("active");
+            itemsControlList[positionSlider].classList.remove("active");
         }
     
         //Incrementare la variabile della posizione
@@ -55,6 +67,7 @@ nextBtn.addEventListener("click", function(){
     
         // Aggiungere la classe active al nuovo elemento
         itemsList[positionSlider].classList.add("active");
+        itemsControlList[positionSlider].classList.add("active");
     }
 
 });
@@ -73,10 +86,12 @@ prevBtn.addEventListener("click", function(){
 
             // Rimuovere la classe active dall'ultimo elemento della lista
             itemsList[0].classList.remove("active");
+            itemsControlList[0].classList.remove("active");
 
         } else {
             // Rimuovere la classe active all'elemento corrente
             itemsList[positionSlider].classList.remove("active");
+            itemsControlList[positionSlider].classList.remove("active");
         }
 
         //Decrementare la variabile della posizione
@@ -84,6 +99,7 @@ prevBtn.addEventListener("click", function(){
     
         // Aggiungere la classe active al nuovo elemento
         itemsList[positionSlider].classList.add("active");
+        itemsControlList[positionSlider].classList.add("active");
     }
 
 });
