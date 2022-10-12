@@ -11,6 +11,9 @@ const carouselImg = document.querySelector(".carousel-img");
 const prevBtn = document.querySelector(".btn.prev");
 const nextBtn = document.querySelector(".btn.next");
 
+const carouselImages = document.getElementsByTagName("img");
+console.log(carouselImages);
+
 // Inseriamo automaticamente le immagini
 for(let i = 0; i < sliderImg.length; i++){
     // Creo la stringa da aggiungere
@@ -56,16 +59,21 @@ nextBtn.addEventListener("click", function(){
             // Rimuovere la classe active dall'ultimo elemento della lista
             itemsList[itemsList.length - 1].classList.remove("active");
             itemsControlList[itemsList.length - 1].classList.remove("active");
+            carouselImages[itemsList.length - 1].classList.remove("next-animation");
+
         } else {
             // Rimuovere la classe active all'elemento corrente
             itemsList[positionSlider].classList.remove("active");
             itemsControlList[positionSlider].classList.remove("active");
+            carouselImages[positionSlider].classList.remove("next-animation");
+
         }
-    
+
         //Incrementare la variabile della posizione
         positionSlider++;
     
         // Aggiungere la classe active al nuovo elemento
+        carouselImages[positionSlider].classList.add("next-animation");
         itemsList[positionSlider].classList.add("active");
         itemsControlList[positionSlider].classList.add("active");
     }
@@ -87,17 +95,21 @@ prevBtn.addEventListener("click", function(){
             // Rimuovere la classe active dall'ultimo elemento della lista
             itemsList[0].classList.remove("active");
             itemsControlList[0].classList.remove("active");
+            carouselImages[0].classList.remove("prev-animation");
+
 
         } else {
             // Rimuovere la classe active all'elemento corrente
             itemsList[positionSlider].classList.remove("active");
             itemsControlList[positionSlider].classList.remove("active");
+            carouselImages[positionSlider].classList.remove("prev-animation");
         }
 
         //Decrementare la variabile della posizione
         positionSlider--;
     
         // Aggiungere la classe active al nuovo elemento
+        carouselImages[positionSlider].classList.add("prev-animation");
         itemsList[positionSlider].classList.add("active");
         itemsControlList[positionSlider].classList.add("active");
     }
@@ -106,14 +118,20 @@ prevBtn.addEventListener("click", function(){
 
 // BONUS AGGIUNTIVO
 console.log(itemsControlList);
-// const element = itemsControlList[0].innerHTML;
-// console.log(element);
 
 for(let i = 0; i < itemsControlList.length; i++){
     itemsControlList[i].addEventListener("click", function(){
         // rimuoviamo la classe active dall' elemento corrente
         itemsList[positionSlider].classList.remove("active");
         itemsControlList[positionSlider].classList.remove("active");
+        carouselImages[positionSlider].classList.remove("prev-animation");
+
+        let animation = "";
+        if(i > positionSlider){
+            animation = "next-animation";
+        } else {
+            animation = "prev-animation";
+        }
 
         // Impostiamo la posizione attuale dell'elemento
         positionSlider = i;
@@ -121,6 +139,8 @@ for(let i = 0; i < itemsControlList.length; i++){
         // Aggiungere la classe active al nuovo elemento
         itemsList[positionSlider].classList.add("active");
         itemsControlList[positionSlider].classList.add("active");
-        
+        carouselImages[positionSlider].classList.add(animation);
+
+
     })
 }
